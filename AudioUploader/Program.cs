@@ -96,10 +96,9 @@ namespace AudioUploader
         private static void UploadAndSaveFile(string p)
         {
             Console.WriteLine("Uploading " + p);
-            var jsonResponse = UploadFile(p, Api.Audio.GetUploadServer().AbsoluteUri);
-            //var response = JsonConvert.DeserializeObject<AudioResponse>(jsonResponse);
-            //var audio = VK.Save(Api, response.Server, response.Audio, Uri.EscapeUriString(response.Hash));
-            var audio = Api.Audio.Save(jsonResponse);
+            string jsonResponse = UploadFile(p, Api.Audio.GetUploadServer().AbsoluteUri);
+            Audio audio = Api.Audio.Save(jsonResponse);
+
             var editParams = new AudioEditParams
             {
                 Artist = audio.Artist,
@@ -112,7 +111,6 @@ namespace AudioUploader
             };
 
             Api.Audio.Edit(editParams);
-            //Api.Audio.Edit((long)audio., audio.owner_id, audio.artist, audio.title, "Search for it", noSearch: true);
             Console.WriteLine(p + " Uploaded");
         }
 
@@ -120,7 +118,7 @@ namespace AudioUploader
         {
             WebClient wClient = new WebClient();
 
-            var answer = wClient.UploadFile(url, "POST", fileName);
+            byte[] answer = wClient.UploadFile(url, "POST", fileName);
             string result = Encoding.ASCII.GetString(answer);
             return result;
         }
@@ -130,6 +128,7 @@ namespace AudioUploader
             if (args.Length % 2 != 0)
                 throw new ArgumentException("Invalid input");
             var dict = new Dictionary<string, string>();
+
             for (int i = 0; i < args.Length; i++)
                 if (args[i].StartsWith("-"))
                     dict[args[i].Substring(1)] = args[i + 1];
