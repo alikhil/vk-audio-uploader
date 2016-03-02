@@ -28,9 +28,12 @@ namespace AudioUploader
             if (args.Length == 0)
             {
                 Console.WriteLine("There are no arguments!");
+                return;
             }
+            #if DEBUG
             foreach (var s in args)
                 Console.WriteLine(s);
+            #endif
             string accessToken, user, password, path;
             var dictionary = ParseArgs(args);
 
@@ -39,7 +42,7 @@ namespace AudioUploader
             dictionary.TryGetValue("p", out password);
             dictionary.TryGetValue("P", out path);
 
-            var pars = new ApiAuthParams
+            var authParams = new ApiAuthParams
             {
                 ApplicationId = Constants.AppId,
                 Login = user,
@@ -49,13 +52,13 @@ namespace AudioUploader
             if (!string.IsNullOrEmpty(accessToken))
                 Api.Authorize(accessToken);
             if (!string.IsNullOrEmpty(user) && !string.IsNullOrEmpty(password))
-                Api.Authorize(pars);
+                Api.Authorize(authParams);
             if (Api.IsAuthorized)
             {
                 Console.WriteLine("Authorized");
                 UploadAudiosOnPath(path);
             }
-            Console.WriteLine("End");
+            Console.WriteLine("Finish");
         }
 
         private static void UploadAudiosOnPath(string path)
