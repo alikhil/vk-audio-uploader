@@ -29,29 +29,28 @@ namespace LikedAudioUploader.Services
             Api = new VkApi();
             Api.Authorize(AuthorizationManager.Instance.AccessToken);
         }
-        public void UploadAudio(LocalAudio a, Action onUpload, Action<string> onFail)
+        public void UploadAudio(LocalAudio a)
         {
+            var trackTitle = a.Artist + " - " + a.Title;
             try
             {
+                NotificationManager.ShowNotification(trackTitle, "Upload stated");
                 AudioEditParams saveParams = UploadAudio(a.FileName);
                 Api.Audio.Edit(saveParams);
-                onUpload();
+                NotificationManager.ShowNotification(trackTitle, "Audio Uploaded!");
             }
-            catch (VkApiException ex)
+            catch (VkApiException)
             {
-                onFail("VK API error: " + ex.Message);
+                NotificationManager.ShowNotification("Failed to upload.\nVK error.", trackTitle);
             }
-            catch(WebException ex)
+            catch(WebException)
             {
-                onFail("Uploading error: " + ex.Message);
+                NotificationManager.ShowNotification("Failed to upload.\nProblems with connection.", trackTitle);
             }
         }
 
         private static AudioEditParams UploadAudio(string p)
         {
-            ServicePointManager.DefaultConnectionLimit = 1000;
-            ServicePointManager.SetTcpKeepAlive(false, 0, 0);
-            Debug.WriteLine("Uploading " + p);
             string jsonResponse = UploadFile(p, Api.Audio.GetUploadServer().AbsoluteUri);
             Audio audio = Api.Audio.Save(jsonResponse);
 
@@ -69,7 +68,7 @@ namespace LikedAudioUploader.Services
 
         private static string UploadFile(string fileName, string url)
         {
-            WebClient wClient = new WebClient();
+            var wClient = new  MyWebClient();
             byte[] answer = wClient.UploadFile(url, "POST", fileName);
             string result = Encoding.ASCII.GetString(answer);
             return result;

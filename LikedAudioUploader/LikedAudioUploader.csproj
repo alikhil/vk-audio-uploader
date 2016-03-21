@@ -88,7 +88,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Classes\LocalAudio.cs" />
+    <Compile Include="Classes\MyWebClient.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Providers\AudioProvider.cs" />
+    <Compile Include="Services\NotificationManager.cs" />
     <Compile Include="Services\UploaderManager.cs" />
     <Compile Include="Services\AuthorizationManager.cs" />
     <Compile Include="Forms\AuthorizationForm.cs">

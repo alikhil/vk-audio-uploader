@@ -23,7 +23,6 @@ namespace LikedAudioUploader
 {
     public partial class MainForm : Form, IDisposable
     {
-        private const String APP_ID = "LikedAudioUploder";
         public MainForm()
         {
             this.WindowState = FormWindowState.Minimized;
@@ -53,8 +52,7 @@ namespace LikedAudioUploader
                 {
                     Thread t = new Thread(() =>
                     {
-                        uploader.UploadAudio(audio, () => ShowToast(audio), 
-                            (message) => MessageBox.Show(message, "Something went wrong..."));
+                        uploader.UploadAudio(audio);
                     });
                     t.Start();
                 }
@@ -86,23 +84,6 @@ namespace LikedAudioUploader
         {
             base.WndProc(ref m);
             HotkeyManager.Instance.OnWndProc(m);
-        }
-
-        private static void ShowToast(LocalAudio a)
-        {
-            var toastXml = ToastNotificationManager.GetTemplateContent(ToastTemplateType.ToastText03);
-
-            // Fill in the text elements
-            var stringElements = toastXml.GetElementsByTagName("text");
-            stringElements[0].AppendChild(toastXml.CreateTextNode(a.Artist + " - " + a.Title));
-            stringElements[1].AppendChild(toastXml.CreateTextNode("File uploaded!"));
-
-            // Specify the absolute path to an image
-            // Create the toast and attach event listeners
-            ToastNotification toast = new ToastNotification(toastXml);
-
-            // Show the toast. Be sure to specify the AppUserModelId on your application's shortcut!
-            ToastNotificationManager.CreateToastNotifier(APP_ID).Show(toast);
         }
 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
