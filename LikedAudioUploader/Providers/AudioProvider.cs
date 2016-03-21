@@ -1,11 +1,12 @@
-﻿using System;
+﻿using LikedAudioUploader.Classes;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace LikedAudioUploader
+namespace LikedAudioUploader.Providers
 {
     public class AudioProvider
     {

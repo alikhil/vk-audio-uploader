@@ -87,32 +87,32 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="LocalAudio.cs" />
-    <Compile Include="AudioProvider.cs" />
-    <Compile Include="AudioUploaderAdapter.cs" />
-    <Compile Include="Authorization.cs" />
-    <Compile Include="AuthorizationForm.cs">
+    <Compile Include="Classes\LocalAudio.cs" />
+    <Compile Include="Providers\AudioProvider.cs" />
+    <Compile Include="Services\UploaderManager.cs" />
+    <Compile Include="Services\AuthorizationManager.cs" />
+    <Compile Include="Forms\AuthorizationForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="AuthorizationForm.Designer.cs">
+    <Compile Include="Forms\AuthorizationForm.Designer.cs">
       <DependentUpon>AuthorizationForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Constants.cs" />
-    <Compile Include="FoobarNotConfiguredException.cs" />
-    <Compile Include="MainForm.cs">
+    <Compile Include="Classes\FoobarNotConfiguredException.cs" />
+    <Compile Include="Forms\MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="MainForm.Designer.cs">
+    <Compile Include="Forms\MainForm.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="HotkeyManager.cs" />
-    <Compile Include="Hotkey.cs" />
+    <Compile Include="Services\HotkeyManager.cs" />
+    <Compile Include="Classes\Hotkey.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="AuthorizationForm.resx">
+    <EmbeddedResource Include="Forms\AuthorizationForm.resx">
       <DependentUpon>AuthorizationForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="MainForm.resx">
+    <EmbeddedResource Include="Forms\MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using LikedAudioUploader.Classes;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.InteropServices;
@@ -6,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace LikedAudioUploader
+namespace LikedAudioUploader.Services
 {
     public class HotkeyManager : IDisposable
     {

@@ -1,4 +1,4 @@
-﻿namespace LikedAudioUploader
+﻿namespace LikedAudioUploader.Classes
 {
     public class LocalAudio
     {

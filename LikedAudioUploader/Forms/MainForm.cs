@@ -15,6 +15,9 @@ using Windows.UI.Notifications;
 using Windows.UI.Xaml;
 using System.IO.IsolatedStorage;
 using System.Threading;
+using LikedAudioUploader.Services;
+using LikedAudioUploader.Providers;
+using LikedAudioUploader.Classes;
 
 namespace LikedAudioUploader
 {
@@ -34,14 +37,14 @@ namespace LikedAudioUploader
 
         private async void Authorize()
         {
-            var authorized = await Authorization.Instance.IsAuthorized();
+            var authorized = await AuthorizationManager.Instance.IsAuthorized();
             if (!authorized)
-                await Authorization.Instance.Authorize();
+                await AuthorizationManager.Instance.Authorize();
         }
 
         private void OnPressHotkey()
         {
-            var uploader = new AudioUploaderAdapter();
+            var uploader = new UploadManager();
             var provider = new AudioProvider();
             try
             {

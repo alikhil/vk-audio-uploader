@@ -7,22 +7,22 @@ using System.Text;
 using System.Threading.Tasks;
 using VkNet;
 
-namespace LikedAudioUploader
+namespace LikedAudioUploader.Services
 {
-    class Authorization
+    class AuthorizationManager
     {
-        private static Authorization instance;
+        private static AuthorizationManager instance;
         private static string fileName = "appdata.txt";
         public string AccessToken { get; private set; }
-        private Authorization()
+        private AuthorizationManager()
         {
 
         }
-        public static Authorization Instance
+        public static AuthorizationManager Instance
         {
             get
             {
-                instance = instance ?? new Authorization();
+                instance = instance ?? new AuthorizationManager();
                 return instance;
             }
         }

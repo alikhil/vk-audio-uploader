@@ -15,16 +15,19 @@ using VkNet.Model.RequestParams;
 using Windows.UI;
 using Windows.UI.Notifications;
 using VkNet.Exception;
-namespace LikedAudioUploader
+using LikedAudioUploader.Services;
+using LikedAudioUploader.Classes;
+
+namespace LikedAudioUploader.Services
 {
-    public class AudioUploaderAdapter
+    public class UploadManager
     {
         public static VkApi Api { get; private set; }
 
-        static AudioUploaderAdapter()
+        static UploadManager()
         {
             Api = new VkApi();
-            Api.Authorize(Authorization.Instance.AccessToken);
+            Api.Authorize(AuthorizationManager.Instance.AccessToken);
         }
         public void UploadAudio(LocalAudio a, Action onUpload, Action<string> onFail)
         {
