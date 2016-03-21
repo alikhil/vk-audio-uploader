@@ -1,12 +1,12 @@
 ﻿namespace LikedAudioUploader
 {
-    public class Audio
+    public class LocalAudio
     {
         public string Artist { get; set; }
         public string Title { get; set; }
         public string FileName { get; set; }
 
-        public Audio(string a, string t, string f)
+        public LocalAudio(string a, string t, string f)
         {
             Artist = a;
             Title = t;

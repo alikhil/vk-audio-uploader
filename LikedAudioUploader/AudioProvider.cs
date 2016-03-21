@@ -9,7 +9,7 @@ namespace LikedAudioUploader
 {
     public class AudioProvider
     {
-        public Audio GetNowPlaying()
+        public LocalAudio GetNowPlaying()
         {
             var foobars = Process.GetProcessesByName("foobar2000");
             if (foobars.Length > 0)
@@ -21,12 +21,13 @@ namespace LikedAudioUploader
                     if (data.Length != 3)
                         throw new FoobarNotConfiguredException();
                     var pathData = data[2].Split(new string[] { "&&" }, StringSplitOptions.None);
-                    return new Audio(data[0], data[1], pathData[0]);
+                    return new LocalAudio(data[0], data[1], pathData[0]);
                 }
                 else
                     throw new FoobarNotConfiguredException();
             }
-            return null;
+            else
+                throw new Exception("Foobar is not running now. \nStart it.");
         }
     }
 }

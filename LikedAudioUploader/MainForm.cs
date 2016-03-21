@@ -50,18 +50,20 @@ namespace LikedAudioUploader
                 {
                     Thread t = new Thread(() =>
                     {
-                        uploader.UploadAudio(audio, () => ShowToast(audio));
+                        uploader.UploadAudio(audio, () => ShowToast(audio), 
+                            (message) => MessageBox.Show(message, "Something went wrong..."));
                     });
                     t.Start();
                 }
+                
             }
             catch(FoobarNotConfiguredException ef)
             {
-                MessageBox.Show(ef.Message, "Error");
+                MessageBox.Show(ef.Message, "Foobar not confugured...");
             }
             catch(Exception e)
             {
-                MessageBox.Show(e.Message, "Unknown error");
+                MessageBox.Show(e.Message, "Something went wrong...");
             }
            
         }
@@ -83,7 +85,7 @@ namespace LikedAudioUploader
             HotkeyManager.Instance.OnWndProc(m);
         }
 
-        private static void ShowToast(Audio a)
+        private static void ShowToast(LocalAudio a)
         {
             var toastXml = ToastNotificationManager.GetTemplateContent(ToastTemplateType.ToastText03);
 
