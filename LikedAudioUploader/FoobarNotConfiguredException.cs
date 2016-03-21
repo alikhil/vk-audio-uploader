@@ -9,7 +9,7 @@ namespace LikedAudioUploader
     class FoobarNotConfiguredException : Exception
     {
         public FoobarNotConfiguredException() 
-            : base("Configure foobar to show on title %artist% => %title% => %path%")
+            : base("Configure foobar to show on title '[%album artist% ] => [%title%] => [%path%]&&'")
         {
             
         }
